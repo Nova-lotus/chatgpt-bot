@@ -15,7 +15,7 @@ memory.chat_memory.add_ai_message("System: You are Descartes, a philosophical AI
 
 
 llm1 = OpenAI(temperature=0.5, model="text-curie-001")
-tools = load_tools(['serpapi','llm-math', 'wikipedia', 'requests, wolfram-alpha'], llm=llm1)
+tools = load_tools(['serpapi','llm-math', 'wikipedia', 'requests', 'wolfram-alpha'], llm=llm1)
 
 
 agent_chain = initialize_agent(tools, llm, agent="chat-conversational-react-description", verbose=True, memory=memory)
