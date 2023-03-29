@@ -1,7 +1,0 @@
-wolframalpha==5.0.0
-langchain
-discord
-openai
-wikipedia
-tiktoken
-google-search-results
