@@ -9,7 +9,7 @@ total_tokens = len(conversation_history[0]["content"].split())
 async def generate_response(prompt, conversation_history):
     global total_tokens
     try:
-        conversation_history.append({"role": "user", "content": f"{prompt}"})
+        conversation_history.append({"role": "user", "content": f"Reply in Posh English, like a englishman: {prompt}"})
         total_tokens += len(prompt.split())
 
         if total_tokens > 1500:
