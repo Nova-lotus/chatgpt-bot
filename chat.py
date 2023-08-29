@@ -24,6 +24,8 @@ async def generate_response(prompt, conversation_history):
             n=1,
             stop=None,
             temperature=0.7,
+            frequency_penalty=0.5, # added this line
+            presence_penalty=0.6, # added this line
         )
         message = response.choices[0].message.content.strip()
 
