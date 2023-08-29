@@ -109,4 +109,26 @@ async def on_ready():
     activity = discord.Game(name="Descartes", type=3)
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
+@bot.tree.command(name="mood", description="Set your mood", guild=discord.Object(id=1065186359523946536))
+async def mood(interaction: discord.Interaction, mood: str):
+    # Save the mood to the database
+    import db
+    user_data = db.get_user_data(db.create_connection(), interaction.user.name)
+    if user_data is None:
+        db.insert_user_data(db.create_connection(), (interaction.user.name, mood, None, None))
+    else:
+        db.update_user_data(db.create_connection(), (mood, user_data[2], user_data[3], interaction.user.name))
+    await interaction.response.send_message(f'Mood set to {mood}', ephemeral=True)
+
+@bot.tree.command(name="reminder", description="Set a reminder", guild=discord.Object(id=1065186359523946536))
+async def reminder(interaction: discord.Interaction, reminder: str):
+    # Save the reminder to the database
+    import db
+    user_data = db.get_user_data(db.create_connection(), interaction.user.name)
+    if user_data is None:
+        db.insert_user_data(db.create_connection(), (interaction.user.name, None, reminder, None))
+    else:
+        db.update_user_data(db.create_connection(), (user_data[1], reminder, user_data[3], interaction.user.name))
+    await interaction.response.send_message(f'Reminder set to {reminder}', ephemeral=True)
+
 bot.run(token)
